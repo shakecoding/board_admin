@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="관리자페이지">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/admin.zip!/" />
+      <root url="jar://$PROJECT_DIR$/bb.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

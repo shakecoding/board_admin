@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>별별쓰담 | 관리자 페이지</title>
+    <link rel="icon" href="/images/admin/0PBC.png">
+    <link rel="stylesheet" href="/css/admin/adminCssAll.css">
+</head>
+<body>
+<header th:replace="/app/admin/adminSideBar.html :: sidebar"></header>
+
+<div id="wrapper">
+    <div class="flexroot">
+        <div class="app_page flex_column">
+
+            <!--우측 Contents-->
+            <div class="app_wrapper">
+                <!--우측 HEADER -->
+                <header class="app_header">
+                    <div class="header_wrapper">
+                        <div class="headerbar">
+                            <div class="headerbar-left">
+                                <ul class="header-nav header-nav-options">
+                                    <li class="header-nav-brand">
+                                        <div class="brand-holder">
+                                            <a href="javascript:void(0)" style="cursor: auto"
+                                               class="location_text margin-right-lg"> <span
+                                                    class="text-gray">주문 관리</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!--메인 페이지 -->
+                <main class="app_main flex_column">
+                    <div class="app_main_context">
+                        <div class="app_main_context_container">
+                            <div id="content" class="dashboard_main">
+                                <div id="alertBox" class="alert__wrap"></div>
+                                <section>
+                                    <div class="clearfix area_wrap">
+                                        <div class="section-body float_l">
+                                            <div class="app-main flex-column flex-row-fluid"
+                                                 id="kt_app_main">
+                                                <div class="d-flex flex-column flex-column-fluid">
+                                                    <!--관련 제목 입력 부분-->
+                                                    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6"
+                                                         data-select2-id="select2-data-kt_app_toolbar">
+                                                        <div id="kt_app_toolbar_container"
+                                                             class="app-container container-xxl d-flex flex-stack"
+                                                             data-select2-id="select2-data-kt_app_toolbar_container">
+                                                            <div
+                                                                    class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                                                                <h1
+                                                                        class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                                                                    주문 목록</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div><!--/ 관련 제목 입력 부분-->
+
+                                                    <!-- 관련 내용 입력 부분 -->
+                                                    <div id="kt_app_content" class="app-content flex-column-fluid">
+                                                        <!--begin::Content container-->
+                                                        <div id="kt_app_content_container"
+                                                             class="app-container container-xxl">
+                                                            <!--begin::Products-->
+                                                            <div class="card card-flush">
+                                                                <!--begin::Card header-->
+                                                                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                                                                    <!--begin::Card title-->
+                                                                    <div class="card-title">
+
+                                                                        <!--begin::Search-->
+<!--                                                                        <div class="d-flex align-items-center position-relative my-1">-->
+<!--                                                                            &lt;!&ndash;begin::검색창 돋보기 Svg Icon | path: icons/duotune/general/gen021.svg&ndash;&gt;-->
+<!--                                                                            <span class="svg-icon svg-icon-1 position-absolute ms-4">-->
+<!--                                                                                <svg width="24" height="24"-->
+<!--                                                                                     viewBox="0 0 24 24" fill="none"-->
+<!--                                                                                     xmlns="http://www.w3.org/2000/svg">-->
+<!--                                                                                    <rect opacity="0.5" x="17.0365"-->
+<!--                                                                                          y="15.1223" width="8.15546"-->
+<!--                                                                                          height="2" rx="1"-->
+<!--                                                                                          transform="rotate(45 17.0365 15.1223)"-->
+<!--                                                                                          fill="currentColor">-->
+<!--                                                                                    </rect>-->
+<!--                                                                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"-->
+<!--                                                                                          fill="currentColor">-->
+<!--                                                                                    </path>-->
+<!--                                                                                </svg>-->
+<!--                                                                            </span>-->
+<!--                                                                            &lt;!&ndash;end::Svg Icon&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                            <form>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                <input type="text" style="display:none">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                <input type="text" name="keyword" onkeydown="javascript:if(event.keyCode==13)searchList(this.form);"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                       data-kt-ecommerce-product-filter="search"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                       class="form-control form-control-solid w-250px ps-14"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                       placeholder="주문 검색">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                            </form>&ndash;&gt;-->
+<!--                                                                        </div>-->
+                                                                        <!--end::Search-->
+
+                                                                    </div>
+                                                                    <!--end::Card title-->
+
+                                                                    <!--begin::Card toolbar-->
+                                                                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                                                                        <div class="w-100 mw-150px">
+                                                                        </div>
+                                                                        <!--begin::Add product-->
+                                                                        <a href="javascript:void(0)" id="deleteOrderBtn"
+                                                                           class="btn btn-primary" style="background : #f1416c;">주문 취소 / 거절</a>
+                                                                        <!--end::Add product-->
+                                                                    </div>
+                                                                    <!--end::Card toolbar-->
+                                                                </div>
+                                                                <!--end::Card header-->
+
+                                                                <!--begin::Card body-->
+                                                                <div class="card-body pt-0">
+                                                                    <!--begin::Table-->
+                                                                    <div id="kt_ecommerce_products_table_wrapper"
+                                                                         class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                                                                   id="kt_ecommerce_products_table">
+
+                                                                                <!--begin::Table head-->
+                                                                                <thead>
+                                                                                <!--begin::Table row-->
+                                                                                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                                                                    <th class="w-10px pe-2 sorting_disabled orderCheckboxTitle"
+                                                                                        rowspan="1" colspan="1"
+                                                                                        aria-label=""
+                                                                                        style="width: 10%;">
+                                                                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                                                                            <input class="form-check-input total"
+                                                                                                   type="checkbox"
+                                                                                                   data-kt-check="true"
+                                                                                                   data-kt-check-target="#kt_ecommerce_products_table .form-check-input"
+                                                                                                   value="1">
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th class="min-w-100px sorting orderDetailIdTitle"
+                                                                                        tabindex="0"
+                                                                                        aria-controls="kt_ecommerce_products_table"
+                                                                                        rowspan="1" colspan="1"
+                                                                                        style="width: 20%;">주문 번호
+                                                                                    </th>
+                                                                                    <th class="text-end min-w-70px sorting orderDateTitle"
+                                                                                        tabindex="0"
+                                                                                        aria-controls="kt_ecommerce_products_table"
+                                                                                        rowspan="1" colspan="1"
+                                                                                        style="width: 20%;">주문 날짜
+                                                                                    </th>
+                                                                                    <th class="text-end min-w-100px sorting memberIdTitle"
+                                                                                        tabindex="0"
+                                                                                        aria-controls="kt_ecommerce_products_table"
+                                                                                        rowspan="1" colspan="1"
+                                                                                        style="width: 20%;">회원명
+                                                                                    </th>
+                                                                                    <th class="text-end min-w-100px sorting orderStatusTitle"
+                                                                                        tabindex="0"
+                                                                                        aria-controls="kt_ecommerce_products_table"
+                                                                                        rowspan="1" colspan="1"
+                                                                                        style="width: 30%;">주문 상태
+                                                                                    </th>
+                                                                                </tr>
+                                                                                <!--end::Table row-->
+                                                                                </thead>
+                                                                                <!--end::Table head-->
+
+                                                                                <!--begin::Table body-->
+                                                                                <tbody class="fw-semibold text-gray-600">
+                                                                                    <form th:action="@{/admin/product/order/delete}" method="post" name="statusForm">
+                                                                                    <th:block th:each="order:${orders}">
+                                                                                    <!-- begin :: 주문 목록 -->
+                                                                                    <tr th:object="${order}" class="odd orderList">
+                                                                                        <!--begin::Checkbox-->
+                                                                                        <td class="orderCheckbox">
+                                                                                            <div
+                                                                                                    class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                                <input class="form-check-input checkbox"
+                                                                                                       type="checkbox" name="checkedValue" th:value="*{orderId}">
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td class="text-end pe-0 orderDetailId">
+                                                                                            <a th:href="@{/admin/product/order/detail(orderId=${order.orderId})}">
+                                                                                            <span class="fw-bold" th:text="*{orderId}"></span>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                        <td class="text-end pe-0 orderDate"
+                                                                                            data-order="15">
+                                                                                            <span class="fw-bold ms-3" th:text="${#temporals.format(order.createdDate, 'yyyy-MM-dd')}"></span>
+                                                                                        </td>
+                                                                                        <td class="text-end pe-0 memberId" th:text="*{memberName}"></td>
+                                                                                        <td class="text-end pe-0 orderStatus">
+                                                                                            <div name="orderStatus" class="form-control form-control-solid " style="font-size: 11px; padding-left: 17px; margin: 0 0 0 0;width: 59%;float: left;">
+                                                                                                <span th:text="*{orderStatus}"></span>
+                                                                                            </div>
+                                                                                            <select class="form-control form-control-solid "
+                                                                                                                 name="orderStatus"
+                                                                                                                 style="font-size: 11px; padding-left: 17px; margin: 0 0 0 0;width: 59%;float: left;text-align: center;display: none">
+                                                                                                <!--  <option value="orderStatus"-->
+                                                                                                <!--  disabled selected-->
+                                                                                                <!--  hidden>주문상태를 선택해주세요-->
+                                                                                                <!--  </option>-->
+                                                                                                <option value="주문완료">주문완료
+                                                                                                </option>
+                                                                                                <option value="주문취소">주문취소
+                                                                                                </option>
+                                                                                                <option value="배송대기중">배송대기중
+                                                                                                </option>
+                                                                                                <option value="배송중">배송중
+                                                                                                </option>
+                                                                                                <option value="배송완료">배송완료
+                                                                                                </option>
+                                                                                            </select>
+
+                                                                                            <button type="button" style="font-family: inherit; width: 119px; float: right;font-size: 10px; height: 29px;display: block;"
+                                                                                                             class="btn btn-light-primary modify">수정 하기</button>
+                                                                                            <button type="button" style="background:#74c9ff;font-family: inherit; float: right;width: 59px;font-size: 7px; height: 29px; display: none;"
+                                                                                                    class="btn btn-primary confirm">수정</button>
+                                                                                            <button type="button" style="background:#ec6e8e; font-family: inherit; float: right;width: 59px;margin-right: 1px; font-size: 7px; height: 29px; display: none;"
+                                                                                                    class="btn btn-danger cancel">취소</button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </th:block>
+                                                                                    </form>
+                                                                                    <form th:action="@{/admin/product/order/modified}" method="post" name="orderModifyForm">
+                                                                                        <input type="hidden" id="orderId" name="orderId">
+                                                                                        <input type="datetime-local" id="createdDate" name="createdDate" style="display: none">
+                                                                                        <input type="hidden" id="memberName" name="memberName">
+                                                                                        <input type="hidden" id="orderStatus" name="orderStatus">
+                                                                                    </form>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+
+
+                                                                        <div class="row">
+
+                                                                            <!-- 우측 하단 페이징 처리 -->
+                                                                            <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                                                                                <div class="dataTables_paginate paging_simple_numbers"
+                                                                                     id="kt_ecommerce_products_table_paginate">
+                                                                                    <ul class="pagination" th:if="${!orders.isEmpty()}">
+                                                                                        <li class="paginate_button page-item previous disabled"
+                                                                                            id="kt_ecommerce_products_table_previous" th:if="${orders.hasPrevious()}">
+                                                                                            <a th:href="@{|/admin/product/order/${orders.number}|}"
+                                                                                               aria-controls="kt_ecommerce_products_table"
+                                                                                               data-dt-idx="0"
+                                                                                               tabindex="0"
+                                                                                               class="page-link"><</a>
+                                                                                        </li>
+                                                                                        <li class="paginate_button page-item active" th:each="page:${#numbers.sequence(1, orders.totalPages)}">
+                                                                                            <a th:text="${page}" th:href="@{|/admin/product/order/${page}|}"
+                                                                                               aria-controls="kt_ecommerce_products_table"
+                                                                                               data-dt-idx="1"
+                                                                                               tabindex="0"
+                                                                                               class="page-link"></a>
+                                                                                        </li>
+                                                                                        <li class="paginate_button page-item next"
+                                                                                            id="kt_ecommerce_products_table_next" th:if="${orders.hasNext()}">
+                                                                                            <a th:href="@{|/admin/product/order/${orders.number +2}|}"
+                                                                                               aria-controls="kt_ecommerce_products_table"
+                                                                                               data-dt-idx="6"
+                                                                                               tabindex="0"
+                                                                                               class="page-link">></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div><!-- / 우측 하단 페이징 처리 -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end::Table-->
+                                                                </div>
+                                                                <!--end::Card body-->
+                                                            </div>
+                                                            <!--end::Products-->
+                                                        </div>
+                                                        <!--end::Content container-->
+
+
+                                                    </div><!-- /관련 내용 입력 부분 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/admin/admin.js"></script>
+<script>
+    var $checkboxes = $(".form-check-input.checkbox");
+    let $form = $("form[name='statusForm']");
+    $(".modify").on("click",function () {
+
+        $("div[name='orderStatus']").css("display", "block")
+        $("select[name='orderStatus']").css("display", "none")
+        $(".modify").css("display", "block")
+        $(".confirm").css("display", "none")
+        $(".cancel").css("display", "none")
+
+        $(this).siblings("div[name='orderStatus']").css("display", "none")
+        $(this).closest("td").find("select[name='orderStatus']").css("display", "block")
+        $(this).css("display", "none")
+        $(this).siblings(".confirm").css("display", "block")
+        $(this).siblings(".cancel").css("display", "block")
+
+        $("input#orderId").val($(this).closest("tr").find(".orderDetailId span").text())
+        $("input#createdDate").val($(this).closest("tr").find(".orderDate span").text())
+        $("input#memberName").val($(this).closest("tr").find(".memberId").text())
+    })
+
+    $("select[name='orderStatus']").on("click",function () {
+        $("input#orderStatus").val($(this).val())
+    })
+
+    $(".cancel").on("click",function () {
+        $("div[name='orderStatus']").css("display", "block")
+        $("select[name='orderStatus']").css("display", "none")
+        $(".modify").css("display", "block")
+        $(".confirm").css("display", "none")
+        $(".cancel").css("display", "none")
+
+        $("input#orderId").val("")
+        $("input#createdDate").val("")
+        $("input#memberName").val("")
+        $("input#orderStatus").val("")
+    })
+
+    $(".confirm").on("click",function () {
+        if(!$("select[name='orderStatus']").val()){
+            alert("주문 상태를 확인해주세요.")
+            return;
+        }
+
+        $("form[name='orderModifyForm']").submit();
+    })
+
+    $("#deleteOrderBtn").on("click",function () {
+        if ($checkboxes.filter(":checked").length == 0) {
+            alert("삭제할 주문을 선택하세요.");
+            return;
+        }
+
+        $form.submit();
+    })
+
+
+</script>
+</html>
