@@ -1,0 +1,4 @@
+1. Vue.js 로 프로젝트 만들기
+2. Use the default project setup 에 체크하기
+3. 터미널에 npm install 때리기
+4. npm run dev 해서 실행되는지 확인
