@@ -2,3 +2,18 @@
 2. Use the default project setup 에 체크하기
 3. 터미널에 npm install 때리기
 4. npm run dev 해서 실행되는지 확인
+5. npm install vue-router
+6. npm install bootstrap
+8. main.js 수정
+9. vue 다 들고 오기
+10. npm install axios
+11. 유저 관리 부터 차근히 진행
+12. 공지사항 테이블 추가
+CREATE TABLE TBL_Notice
+(
+    notice_id           NUMBER PRIMARY KEY,
+    notice_title        VARCHAR2(1000),
+    notice_content      VARCHAR2(1000),
+    notice_date         date
+);
+13. 공지사항 select 진행
