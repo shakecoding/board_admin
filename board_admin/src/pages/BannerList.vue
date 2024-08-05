@@ -1,5 +1,5 @@
 <template>
-  <Header  main-content="notice"/>
+  <Header main-content="banner"/>
   <main>
     <section>
       <div class="row mb-4">
@@ -10,13 +10,12 @@
       <div class="row mb-4">
         <div class="col d-flex justify-content-end gap-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="selectAll">
             <label class="form-check-label" for="selectAll">
+              <input class="form-check-input" type="checkbox" id="selectAll" :checked="allSelected" @change="toggleSelectAll">
               전체 선택
             </label>
           </div>
-          <a href="/admin/banner/add" class="btn btn-primary">배너 추가</a>
-          <button id="deleteBannerBtn" class="btn btn-danger">삭제</button>
+          <button @click="deleteSelectedBanners" class="btn btn-danger">삭제</button>
         </div>
       </div>
       <div class="row">
@@ -24,129 +23,33 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex flex-wrap justify-content-center">
-                <!-- Example of a banner card -->
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
+                <div v-for="banner in paginatedBanners" :key="banner.bannerId" class="card-inter">
+                  <input v-model="selectedBanners" type="checkbox" :value="banner.bannerId">
+                  <div>
+                    {{ banner.bannerTitle }}
                   </div>
                   <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
+                    <img :src="'http://localhost:8090' + banner.bannerImg" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
                   </div>
                   <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
+                    <a :href="`/admin/banner/modify/${banner.id}`" style="cursor: pointer; align-content: end">
+                      <img style="width: 20%; float: right; margin-right: 4px;" src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
                     </a>
                   </div>
                 </div>
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
-                  </div>
-                  <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
-                  </div>
-                  <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
-                </div>
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
-                  </div>
-                  <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
-                  </div>
-                  <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
-                </div>
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
-                  </div>
-                  <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
-                  </div>
-                  <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
-                </div>
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
-                  </div>
-                  <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
-                  </div>
-                  <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
-                </div>
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
-                  </div>
-                  <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
-                  </div>
-                  <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
-                </div>
-                <div class="card-inter">
-                  <div class="card-head">
-                    <header>
-                      <input class="form-check-input" type="checkbox" name="checkedValue" style="width: 13px;margin-right: 8px;">메인 배너
-                    </header>
-                  </div>
-                  <div style="width: 100%;">
-                    <img src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
-                  </div>
-                  <div>
-                    <a href="/admin/banner/modify/1" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;"
-                           src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
-                </div>
-                <!-- Add more banner cards as needed -->
               </div>
             </div>
             <nav>
               <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                  <a class="page-link" href="#" @click.prevent="changePage(currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }">
+                  <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+                </li>
+                <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                  <a class="page-link" href="#" @click.prevent="changePage(currentPage + 1)">Next</a>
+                </li>
               </ul>
             </nav>
           </div>
@@ -157,17 +60,98 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Header from "@/components/Header.vue";
 
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:8090' // Spring Boot 애플리케이션의 포트 번호
+});
 
 export default {
   name: 'BannerList',
-  components: {Header},
-
-}
-
+  components: { Header },
+  data() {
+    return {
+      banners: [],
+      currentPage: 1,
+      pageSize: 8,
+      selectedBanners: [], // 선택된 공지사항의 ID 저장
+    };
+  },
+  mounted() {
+    this.fetchBanners();
+  },
+  methods: {
+    async fetchBanners() {
+      try {
+        const response = await axiosInstance.get('/admin/banners');
+        this.banners = response.data;
+      } catch (error) {
+        console.error('Error fetching notices:', error);
+      }
+    },
+    changePage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+      }
+    },
+    toggleSelectAll(event) {
+      if (event.target.checked) {
+        this.selectedBanners = this.paginatedBanners.map(banner => banner.bannerId);
+      } else {
+        this.selectedBanners = [];
+      }
+    },
+    // async deleteSelectedBanners() {
+    //   const selectedBanners = this.banners.filter(banner => banner.selected);
+    //   const selectedIds = selectedBanners.map(banner => banner.id);
+    //
+    //   if (selectedIds.length === 0) {
+    //     alert('삭제할 배너를 선택하세요.');
+    //     return;
+    //   }
+    //
+    //   try {
+    //     await axiosInstance.delete('/admin/banners', {
+    //       data: { ids: selectedIds }
+    //     });
+    //     alert('선택한 배너가 삭제되었습니다.');
+    //     await this.fetchBanners(); // 배너 목록을 다시 로드합니다.
+    //   } catch (error) {
+    //     console.error(error);
+    //     alert('배너 삭제 중 오류가 발생했습니다.');
+    //   }
+    // }
+  },
+  computed: {
+    paginatedBanners() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.banners.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.banners.length / this.pageSize);
+    },
+    allSelected() {
+      const paginatedBannersIds = this.paginatedBanners.map(banner => banner.bannerId);
+      console.log(paginatedBannersIds.length > 0 && paginatedBannersIds.every(id => this.paginatedBanners.includes(id)))
+      return paginatedBannersIds.length > 0 && paginatedBannersIds.every(id => this.selectedBanners.includes(id));
+    }
+  }
+};
 </script>
 
 <style scoped>
-
+.card-inter {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+}
+.card-head header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 </style>

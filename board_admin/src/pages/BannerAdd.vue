@@ -1,5 +1,5 @@
 <template>
-  <Header  main-content="notice"/>
+  <Header  main-content="banner"/>
   <main>
     <section>
       <div class="row">
