@@ -31,11 +31,6 @@
                   <div style="width: 100%;">
                     <img :src="'http://localhost:8090' + banner.bannerImg" alt="Banner" style="width: 100%; height: 132px; object-fit: cover;">
                   </div>
-                  <div>
-                    <a :href="`/admin/banner/modify/${banner.id}`" style="cursor: pointer; align-content: end">
-                      <img style="width: 20%; float: right; margin-right: 4px;" src="https://getbootstrap.kr/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -74,7 +69,7 @@ export default {
     return {
       banners: [],
       currentPage: 1,
-      pageSize: 8,
+      pageSize: 6,
       selectedBanners: [], // 선택된 공지사항의 ID 저장
     };
   },
@@ -102,26 +97,34 @@ export default {
         this.selectedBanners = [];
       }
     },
-    // async deleteSelectedBanners() {
-    //   const selectedBanners = this.banners.filter(banner => banner.selected);
-    //   const selectedIds = selectedBanners.map(banner => banner.id);
-    //
-    //   if (selectedIds.length === 0) {
-    //     alert('삭제할 배너를 선택하세요.');
-    //     return;
-    //   }
-    //
-    //   try {
-    //     await axiosInstance.delete('/admin/banners', {
-    //       data: { ids: selectedIds }
-    //     });
-    //     alert('선택한 배너가 삭제되었습니다.');
-    //     await this.fetchBanners(); // 배너 목록을 다시 로드합니다.
-    //   } catch (error) {
-    //     console.error(error);
-    //     alert('배너 삭제 중 오류가 발생했습니다.');
-    //   }
-    // }
+    async deleteSelectedBanners() {
+      // 선택된 공지사항을 삭제하는 로직
+      if (this.selectedBanners.length === 0) {
+        alert("삭제할 공지사항을 선택하세요.");
+        return;
+      }
+
+      if (confirm("선택한 공지사항을 정말 삭제하시겠습니까?")) {
+        try {
+          // 선택된 공지사항을 삭제하고 삭제 요청이 완료된 후에 목록을 새로고침
+          await Promise.all(
+              this.selectedBanners.map(bannerId =>
+                  axiosInstance.delete(`/admin/banners/${bannerId}`)
+              )
+          );
+
+          // 삭제가 완료된 후 공지사항 목록을 새로고침
+          this.fetchBanners();
+
+          // 선택 초기화
+          this.selectedBanners = [];
+          alert("선택한 배너가 삭제되었습니다.");
+        } catch (error) {
+          console.error("공지사항 삭제 중 오류 발생:", error);
+          alert("배너 삭제 중 오류가 발생했습니다.");
+        }
+      }
+    },
   },
   computed: {
     paginatedBanners() {

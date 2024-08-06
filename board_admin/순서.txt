@@ -16,4 +16,4 @@ CREATE TABLE TBL_Notice
     notice_content      VARCHAR2(1000),
     notice_date         date
 );
-13. 공지사항 select 진행
+13. crud 진행

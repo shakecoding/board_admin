@@ -13,7 +13,10 @@ const router = createRouter({ // 라우터 인스턴스 생성
     history: createWebHistory(), // html5 히스토리 모드를 사용, URL 변경을 처리하는 함수!
     routes : [
         { path: '/', component: Main },
-        { path: '/banner', component: Banner },
+        {
+            path: '/banner',
+            name : 'Banner',
+            component: Banner },
         { path: '/bannerAdd', component: BannerAdd },
         {
             path: '/notice',
